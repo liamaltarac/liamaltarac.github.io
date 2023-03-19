@@ -45,7 +45,6 @@
 
       function binarySearchImageSize(){
         if (window.matchMedia('(min-width: 991px)').matches){
-            console.log(true)
             err = 2
             low = 0;
             high = parseInt(window.getComputedStyle(document.getElementById('my_stuff')).getPropertyValue("width"), 10) - 2*parseInt(window.getComputedStyle(document.getElementById('my_stuff')).getPropertyValue("padding-left"), 10);
