@@ -10,19 +10,72 @@
 	<style>
 
 
-        #pic_of_me{
-            max-width:40vw;
-            aspect-ratio : 1 / 1;
-            object-fit: cover;
-            object-position: 0 20%;
 
+      @media (min-width: 991px){
+
+          #my_pic{
+              height : 0px;
+              aspect-ratio: 1/1;
+              object-fit: cover;
+              object-position: 0 20%;
+          }
         }
+
+
+ 
+
+        @media (max-width: 991px){
+
+            #my_pic{
+              max-width:40vw;
+              aspect-ratio: 1/1;
+              object-fit: cover;
+              object-position: 0 20%;
+          }
+        }
+        
 
         body{
           font-family: "Computer Modern Serif";
         }
 
     </style>
+
+   <script>
+
+      function binarySearchImageSize(){
+        if (window.matchMedia('(min-width: 991px)').matches){
+            console.log(true)
+            err = 5
+            low = 0;
+            high = parseInt(window.getComputedStyle(document.getElementById('my_stuff')).getPropertyValue("width"), 10) - 2*parseInt(window.getComputedStyle(document.getElementById('my_stuff')).getPropertyValue("padding-left"), 10);
+            mid = (high + low) / 2;
+
+            t_h = 0;
+
+            while(!(t_h <= mid + err && t_h >= mid - err) ) {
+              mid = (high + low) / 2;
+              document.getElementById("my_pic").style.height= mid + 'px';
+              t_h = parseInt(window.getComputedStyle(document.getElementById('my_text')).getPropertyValue("height"), 10);
+
+              if (mid < t_h){
+                low = mid;
+              }else{
+                high = mid;
+              }
+            }
+        }else{              
+              document.getElementById("my_pic").setAttribute("style", "aspect-ratio: 1/1");
+        }
+      }
+    
+
+
+      window.onresize = binarySearchImageSize;
+      window.onload = binarySearchImageSize;
+
+   </script>
+
     </head>
 
 
@@ -36,16 +89,13 @@
             </div> 
 
             <div class="row" >
-                <div id="my_stuff" >
-                    <div class = "d-flex col-lg-4 row justify-content-center float-lg-end mb-2 mb-lg-0 ">
-                        <img id="pic_of_me"  class='img-responsive' src="pictures/laronde.jpg " >
-                      </div>
+                <div id="my_stuff" class ="d-flex flex-wrap flex-lg-nowrap justify-content-center" >
+                  
+                        <img id = "my_pic" class=" order-lg-2 mb-2 mb-lg-0 ms-lg-2 " src="pictures/laronde.jpg " >
                     
                    
-                    <div class="col-lg-8">
-
-                    <p>
-                    
+                    <div   class = " order-lg-1   ">
+                      <p id="my_text" style="margin-bottom: 0;">
                     Welcome to my website. My name is Liam. <br><br>
                     
                     I'm currently pursuing a masters degree at l'École de Technologie Superieure <a href = "https://www.etsmtl.ca" target="_blank">(ÉTS)</a> in the 
@@ -55,10 +105,8 @@
                     Prior to my Master's, I obtained a Bachelor's degree in Electrical Engineering, with a concentration in Computer Science from <a href = "https://www.etsmtl.ca" target="_blank">ÉTS</a> in 2020. <br><br>
 
                     I am truly excited about the work that I am doing, and I hope that my research will contribute to the advancement of this rapidly growing field. Thank you for visiting my website, and feel free to contact me if you have any questions or comments.
-                  </p>  
-                  <hr>
-
-                </div>
+                  </p>
+                 </div>
 
                
                 </div>
