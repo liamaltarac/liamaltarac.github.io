@@ -1,1 +1,1 @@
-# [https://liamaltarac.github.io/](https://liamaltarac.github.io/)
+# [liamaltarac.github.io](https://liamaltarac.github.io/)
