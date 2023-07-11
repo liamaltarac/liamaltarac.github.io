@@ -76,7 +76,7 @@
       function adjustBottomMargin(){
         h = parseInt(window.getComputedStyle(document.getElementById('my_footer')).getPropertyValue("height"), 10);
         console.log(h)
-        document.getElementsByTagName("body").style.marginBottom =  h + 'px';
+        document.getElementsByTagName("body")[0].style.marginBottom =  h + 'px';
 
       }
 
