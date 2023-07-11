@@ -5,4 +5,11 @@ html {
   min-height: 100%;
 }
 
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto; /* Set the fixed height of the footer here */
+  line-height: 0px; /* no vertical center. Put at bottom*/
+}
 
