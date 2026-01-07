@@ -59,30 +59,40 @@
 
     </style>
 
-   <script>
-    
+    <script>
+      function adjustBottomMargin() {
+        const box = document.getElementById('analytics_box');
+        if (!box) return;
 
-      function adjustBottomMargin(){
-        h = parseInt(window.getComputedStyle(document.getElementById('analytics_box')).getPropertyValue("height"), 10);
-        console.log(h)
-        document.getElementsByTagName("body")[0].style.marginBottom =  h + 'px';
-        //document.getElementById("my_footer").style.marginBottom =  h + 'px';
-
+        const h = Math.ceil(box.getBoundingClientRect().height);
+        document.body.style.marginBottom = h + 'px';
       }
 
-      function pageLoaded(){
-      adjustBottomMargin()  
+      function adjustBottomMarginWithRetry() {
+        let tries = 0;
+        const maxTries = 60;      // ~6 seconds if interval=100ms
+        const interval = 100;
 
+        const t = setInterval(() => {
+          adjustBottomMargin();
+
+          const h = Math.ceil(document.getElementById('analytics_box').getBoundingClientRect().height);
+          // Stop once it has a real height (script rendered)
+          if (h > 20 || tries >= maxTries) clearInterval(t);
+
+          tries++;
+        }, interval);
       }
-      function pageResize(){
-      adjustBottomMargin()  
 
-      }
+      window.addEventListener('load', () => {
+        adjustBottomMarginWithRetry();
+      });
 
-      window.onresize = pageResize;
-      window.onload = pageLoaded;
+      window.addEventListener('resize', () => {
+        adjustBottomMargin();
+      });
+    </script>
 
-   </script>
 
     </head>
 
