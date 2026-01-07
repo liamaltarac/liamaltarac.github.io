@@ -15,29 +15,43 @@
     
       } 
 
-      @media (min-width: 991px){
-
-          #my_pic{
-              height : 0px;
-              aspect-ratio: 1/1;
-              object-fit: cover;
-              object-position: 0 20%;
-          }
+      /* Large screens: equal-height columns, image fills height */
+      @media (min-width: 991px) {
+        #my_stuff{
+          display: flex;
+          align-items: stretch;     /* key: both children become same height */
+          justify-content: center;
+          gap: .5rem;
         }
 
-
- 
-
-        @media (max-width: 991px){
-
-            #my_pic{
-              max-width:40vw;
-              aspect-ratio: 1/1;
-              object-fit: cover;
-              object-position: 0 20%;
-          }
+        .photo{
+          flex: 0 0 auto;
+          height: auto;             /* it will stretch due to flex */
         }
-        
+
+        #my_pic{
+          height: 100%;
+          aspect-ratio: 1 / 1;
+          width: auto;
+          object-fit: cover;
+          object-position: 0 20%;
+          display: block;
+          max-width: 320px;         /* optional safety clamp (tweak/remove) */
+        }
+      }
+
+      /* Small screens: your current intent (square, not too big) */
+      @media (max-width: 991px){
+        #my_pic{
+          max-width: 40vw;
+          aspect-ratio: 1 / 1;
+          height: auto;
+          object-fit: cover;
+          object-position: 0 20%;
+          display: block;
+        }
+      }
+
 
         body{
           font-family: "Computer Modern Serif";
@@ -48,31 +62,6 @@
    <script>
     
 
-      function binarySearchImageSize(){
-        if (window.matchMedia('(min-width: 991px)').matches){
-            err = 2
-            low = 0;
-            high = parseInt(window.getComputedStyle(document.getElementById('my_stuff')).getPropertyValue("width"), 10) - 2*parseInt(window.getComputedStyle(document.getElementById('my_stuff')).getPropertyValue("padding-left"), 10);
-            mid = (high + low) / 2;
-
-            t_h = 0;
-
-            while(!(t_h <= mid + err && t_h >= mid - err) ) {
-              mid = (high + low) / 2;
-              document.getElementById("my_pic").style.height= mid + 'px';
-              t_h = parseInt(window.getComputedStyle(document.getElementById('my_text')).getPropertyValue("height"), 10);
-
-              if (mid < t_h){
-                low = mid;
-              }else{
-                high = mid;
-              }
-            }
-        }else{              
-              document.getElementById("my_pic").setAttribute("style", "aspect-ratio: 1/1");
-        }
-      }
-    
       function adjustBottomMargin(){
         h = parseInt(window.getComputedStyle(document.getElementById('analytics_box')).getPropertyValue("height"), 10);
         console.log(h)
@@ -82,14 +71,10 @@
       }
 
       function pageLoaded(){
-
-      binarySearchImageSize()
       adjustBottomMargin()  
 
       }
       function pageResize(){
-
-      binarySearchImageSize()
       adjustBottomMargin()  
 
       }
@@ -115,20 +100,21 @@
             <div id = "intro" class="row" >
                 <div id="my_stuff" class ="d-flex flex-wrap flex-lg-nowrap justify-content-center" >
                   
-                        <img id = "my_pic" class=" order-lg-2 mb-2 mb-lg-0 ms-lg-2 " src="pictures/laronde.jpg " >
-                    
+                  <div class="photo order-lg-2 mb-2 mb-lg-0 ms-lg-2">
+                    <img id="my_pic" src="pictures/laronde.jpg">
+                  </div>                    
                    
                     <div   class = " order-lg-1   ">
                       <p id="my_text" style="margin-bottom: 0;">
                     Welcome to my website. My name is Liam. <br><br>
                     
-                    I'm currently pursuing a masters degree at l'École de Technologie Superieure <a href = "https://www.etsmtl.ca" target="_blank">(ÉTS)</a> in the 
-                    Laboratory for Imagery, Vision and Artificial Intelligence (<a href = "https://liviamtl.ca/" target="_blank" >LIVIA</a>), under the supervision of <a href = "http://www.matthewtoews.com/" target="_blank">Dr. Matthew Toews</a>. <br>
-                    While I'm facinated by all areas of ML/DL, my current interest is computer vision. For my masters research, I am investigating the learned patterns that arise in convolutional filters, with the aim to better initialize CNNs.  <br><br>
-                    
-                    Prior to my Master's, I obtained a Bachelor's degree in Electrical Engineering, with a concentration in Computer Science from <a href = "https://www.etsmtl.ca" target="_blank">ÉTS</a> in 2020. <br><br>
+                    I recently completed a Master’s degree at l’École de technologie supérieure (<a href="https://www.etsmtl.ca" target="_blank">ÉTS</a>) within the Laboratory for Imagery, Vision, and Artificial Intelligence (<a href="https://liviamtl.ca/" target="_blank">LIVIA</a>), under the supervision of <a href="http://www.matthewtoews.com/" target="_blank">Dr. Matthew Toews</a>.<br><br>
 
-                    I am truly excited about the work that I am doing, and I hope that my research will contribute to the advancement of this rapidly growing field. Thank you for visiting my website, and feel free to contact me if you have any questions or comments.
+                    My Master’s research focused on analyzing the structure of learned convolutional kernels, with the aim of better understanding how information propagates through convolutional neural networks in image space. Through this work, I seek to contribute mechanistic insight into the behavior of modern deep vision models.<br><br>
+                    
+                    Prior to my graduate studies, I earned a Bachelor’s degree in Electrical Engineering with a concentration in Computer Science from <a href="https://www.etsmtl.ca" target="_blank">ÉTS</a> in 2020.<br><br>
+                    
+                    While I am broadly interested in machine learning and deep learning, my primary research focus is computer vision. I am currently seeking a PhD position. Thank you for visiting my website, and feel free to reach out if you would like to connect or discuss potential research opportunities.
                   </p>
                  </div>
                
