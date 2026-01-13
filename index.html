@@ -9,6 +9,7 @@
     <link href="css/sticky-footer.css" rel="stylesheet">
 
 	<style>
+      html { scroll-behavior: smooth; }
 
       #analytics_box a{
           min-height: 0px !important;
@@ -23,6 +24,14 @@
           justify-content: center;
           gap: .5rem;
         }
+        #my_stuff > .order-lg-1{
+          display: flex;
+          flex-direction: column;
+        }
+        #my_text{
+          flex: 1 1 auto;
+          margin: 0;
+        }
 
         .photo{
           flex: 0 0 auto;
@@ -30,7 +39,7 @@
         }
 
         #my_pic{
-          height: 100%;
+          height: 100%; 
           aspect-ratio: 1 / 1;
           width: auto;
           object-fit: cover;
@@ -51,6 +60,15 @@
           display: block;
         }
       }
+
+              .photo .list-group-item {
+          background: transparent;
+          font-size: 0.95rem;
+        }
+
+        .photo .list-group-item + .list-group-item {
+          margin-left: 0.25rem;
+        }
 
 
         body{
@@ -110,12 +128,29 @@
             <div id = "intro" class="row" >
                 <div id="my_stuff" class ="d-flex flex-wrap flex-lg-nowrap justify-content-center" >
                   
-                  <div class="photo order-lg-2 mb-2 mb-lg-0 ms-lg-2">
-                    <img id="my_pic" src="pictures/laronde.jpg">
-                  </div>                    
-                   
-                    <div   class = " order-lg-1   ">
-                      <p id="my_text" style="margin-bottom: 0;">
+                      <div class="photo order-lg-2 mb-2 mb-lg-0 ms-lg-2 text-center">
+                        <img id="my_pic" src="pictures/laronde.jpg">
+
+                        <ul class="list-group list-group-horizontal justify-content-center mt-3 flex-wrap">
+                          <a href="mailto:liam.frija-altarac.1@ens.etsmtl.ca"
+                            class="list-group-item border-0 px-2 py-1">
+                            <strong>E-mail</strong>
+                          </a>
+                          <a href="https://github.com/liamaltarac"
+                            target="_blank"
+                            class="list-group-item border-0 px-2 py-1">
+                            <strong>GitHub</strong>
+                          </a>
+                          <a href="cv/Liam_Frija-Altarac_CV.pdf"
+                            target="_blank"
+                            class="list-group-item border-0 px-2 py-1">
+                            <strong>CV</strong>
+                          </a>
+                        </ul>
+                      </div>                  
+                                        
+                    <div   class = " order-lg-1   " >
+                      <p id="my_text" style="margin: 0;">
                     Welcome to my website. My name is Liam. <br><br>
                     
                     I recently completed a Master’s degree at l’École de technologie supérieure (<a href="https://www.etsmtl.ca" target="_blank">ÉTS</a>) within the Laboratory for Imagery, Vision, and Artificial Intelligence (<a href="https://www.etsmtl.ca/en/labs/livia" target="_blank">LIVIA</a>), under the supervision of <a href="http://www.matthewtoews.com/" target="_blank">Dr. Matthew Toews</a>.<br><br>
@@ -131,7 +166,12 @@
                 </div>
             </div>
             
-            <div class="row  mt-5 mb-5 justify-content-center" id = "contact"> 
+
+            <br>
+
+            <br>
+
+            <!--<div class="row  mt-5 mb-5 justify-content-center" id = "contact"> 
 
               <div class="col-auto text-center">
                 <ul class="list-group list-group-horizontal d-flex flex-wrap">
@@ -142,11 +182,56 @@
                 </ul>
               </div>
 
+            </div> -->
+
+            <div class="row mb-4 justify-content-center d-lg-none"  id="sections">
+              <div class="col-auto text-center">
+                <ul class="list-group list-group-horizontal d-flex flex-wrap">
+                  <a href="#projects" class="list-group-item flex-fill border-0"><strong>Projects</strong></a>
+                  <a href="#papers" class="list-group-item flex-fill border-0"><strong>Papers</strong></a>
+                  <a href="#interests" class="list-group-item flex-fill border-0"><strong>Misc</strong></a>
+                </ul>
+              </div>
             </div>
 
-            <hr>
+           <hr>
 
+           <section id="projects" class="mt-5">
+            <h2 class="text-center text-lg-start">Projects</h2>
+          
+            <div class="row g-3 mt-1">
+              <div class="col-12">
+                <div class="border rounded-3 p-3">
+                  <div class="d-flex flex-wrap justify-content-between align-items-baseline">
+                    <strong>Convolution Propagation Lab</strong>
+                    <span class="text-muted">2025</span>
+                  </div>
+                  <div class="mt-1">
+                    How do various convolutional kernel structures impact the propagation of information through convolutional neural networks?
+                  </div>
+                  <div class="mt-2">
+                    <a href="https://github.com/liamaltarac/Convolution-Propagation-Lab" target="_blank">Code</a> ·
+                    <a href="/Convolution-Propagation-Lab/" target="_blank">Demo</a> ·
+                    <!--<a href="#" target="_blank">Paper</a>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
 
+          <!---<section id="papers" class="mt-5">
+            <h2 class="text-center text-lg-start">Papers</h2>
+          
+            <ul class="mt-2">
+              <li>
+                <strong>Paper title</strong>. <em>Venue</em>, 2025.
+                <a href="#" target="_blank">PDF</a>
+                · <a href="#" target="_blank">arXiv</a>
+                · <a href="#" target="_blank">Code</a>
+              </li>
+            </ul>
+          </section> --->
 
         
         </div>
