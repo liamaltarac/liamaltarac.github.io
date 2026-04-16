@@ -109,6 +109,76 @@
       window.addEventListener('resize', () => {
         adjustBottomMargin();
       });
+
+
+    
+      // Load publications from JSON and render Bootstrap cards.
+      document.addEventListener('DOMContentLoaded', async () => {
+        const container = document.getElementById('papers-list');
+        if (!container) return;
+
+        const normalizeLinks = (links) => {
+          if (Array.isArray(links)) {
+            return links.filter(link => link && link.url && link.label);
+          }
+
+          if (!links || typeof links !== 'object') {
+            return [];
+          }
+
+          const labels = {
+            pdf: 'PDF',
+            code: 'Code',
+            demo: 'Demo',
+            paper: 'Paper',
+            arxiv: 'arXiv',
+          };
+
+          return Object.entries(links)
+            .filter(([, url]) => Boolean(url))
+            .map(([key, url]) => ({
+              label: labels[key] || key,
+              url,
+            }));
+        };
+
+        try {
+          const response = await fetch('publications.json');
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+          }
+
+          const publications = await response.json();
+          container.innerHTML = publications.map(pub => {
+            const links = normalizeLinks(pub.links);
+            const summary = pub.description || [pub.authors, pub.venue].filter(Boolean).join('. ');
+
+            return `
+              <div class="col-12">
+                <div class="border rounded-3 p-3">
+                  <div class="d-flex flex-wrap justify-content-between align-items-baseline">
+                    <strong>${pub.title ?? ''}</strong>
+                    <span class="text-muted">${pub.year ?? ''}</span>
+                  </div>
+                  ${summary ? `
+                  <div class="mt-1">
+                    ${summary}
+                  </div>` : ''}
+                  ${links.length ? `
+                  <div class="mt-2">
+                    ${links.map(link => `<a href="${link.url}" target="_blank">${link.label}</a>`).join(' &middot; ')}
+                  </div>` : ''}
+                </div>
+              </div>
+            `;
+          }).join('');
+        } catch (error) {
+          console.error('Failed to load publications.json:', error);
+          container.innerHTML = '';
+        }
+      });
+
+
     </script>
 
 
@@ -187,14 +257,22 @@
             <div class="row mb-4 justify-content-center d-lg-none"  id="sections">
               <div class="col-auto text-center">
                 <ul class="list-group list-group-horizontal d-flex flex-wrap">
-                  <a href="#projects" class="list-group-item flex-fill border-0"><strong>Projects</strong></a>
                   <a href="#papers" class="list-group-item flex-fill border-0"><strong>Papers</strong></a>
+                  <a href="#projects" class="list-group-item flex-fill border-0"><strong>Projects</strong></a>
                   <a href="#interests" class="list-group-item flex-fill border-0"><strong>Misc</strong></a>
                 </ul>
               </div>
             </div>
 
            <hr>
+
+           <section id="papers" class="mt-5">
+            <h2 class="text-center text-lg-start">Papers</h2>
+          
+            <div id="papers-list" class="row g-3 mt-1"></div>
+
+          </section>
+          
 
            <section id="projects" class="mt-5">
             <h2 class="text-center text-lg-start">Projects</h2>
@@ -218,7 +296,8 @@
               </div>
             </div>
           </section>
-          
+
+
 
           <!---<section id="papers" class="mt-5">
             <h2 class="text-center text-lg-start">Papers</h2>

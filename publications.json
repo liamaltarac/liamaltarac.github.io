@@ -1,0 +1,12 @@
+[
+  {
+    "title": "The Mechanics of CNN Filtering with Rectification",
+    "authors": "Liam Frija-Altarac, Matthew Toews",
+    "venue": "CVPR Findings",
+    "year": 2025,
+    "links": {
+      "pdf": "https://arxiv.org/abs/2512.24338",
+      "code": "https://github.com/liamaltarac/Information-Mechanics"
+    }
+  }  
+]
