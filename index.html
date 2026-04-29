@@ -39,6 +39,9 @@
         .photo{
           flex: 0 0 auto;
           height: auto;             /* it will stretch due to flex */
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
 
         #my_pic{
@@ -48,6 +51,7 @@
           object-fit: cover;
           object-position: 0 20%;
           display: block;
+          margin-inline: auto;
           max-width: 320px;         /* optional safety clamp (tweak/remove) */
         }
       }
@@ -61,6 +65,7 @@
           object-fit: cover;
           object-position: 0 20%;
           display: block;
+          margin-inline: auto;
         }
       }
 
@@ -218,6 +223,11 @@
                             target="_blank"
                             class="list-group-item border-0 px-2 py-1">
                             <strong>CV</strong>
+                          </a>
+                          <a href="https://scholar.google.ca/citations?user=hx4Qp2IAAAAJ"
+                            target="_blank"
+                            class="list-group-item border-0 px-2 py-1">
+                            <strong>Google Scholar</strong>
                           </a>
                         </ul>
                       </div>                  
